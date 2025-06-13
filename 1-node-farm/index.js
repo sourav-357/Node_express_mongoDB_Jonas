@@ -1,6 +1,7 @@
 const fs = require('fs');
+const http = require('http');
 
-
+/*
 // ------------------------ Reading and writting files Synchronically------------------------//
 
 // Reading content from the file
@@ -40,3 +41,20 @@ fs.readFile('./txt/start.txt', 'utf-8', (err, data1) => {
 });
 console.log("will read file!");
 console.log(fs.readFileSync(`./txt/final.txt`, 'utf-8'));
+*/
+
+// ------------------------ Creating a basic sever ------------------------//
+
+// Creating a server
+const server = http.createServer((req, res) => {
+     console.log(req);
+     res.end('Hello from the server!');
+});
+
+// Starting a server 
+server.listen(8000, '127.0.0.1', () => {
+     console.log('Listining to requests on port 8000');
+})
+
+
+// ------------------------ Creating a basic sever ------------------------//

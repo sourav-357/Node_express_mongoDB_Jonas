@@ -47,6 +47,7 @@ console.log(fs.readFileSync(`./txt/final.txt`, 'utf-8'));
 
 // ------------------------ Routing ------------------------//
 
+/*
 // Creating a server
 const server = http.createServer((req, res) => {
 
@@ -71,5 +72,80 @@ const server = http.createServer((req, res) => {
 server.listen(8000, '127.0.0.1', () => {
      console.log('Listining to requests on port 8000');
 });
+*/
+
+// ------------------------ Building a simple API ------------------------//
+
+/*
+// Reading the file
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+
+// Creating a server
+const server = http.createServer((req, res) => {
+
+     // Getting url of requested server
+     const pathName = req.url;
+
+     // Responding as per server request
+     if (pathName === '/overview' || pathName === '/') {
+          res.end("This is the Overview");
+     } else if (pathName === '/Product') {
+          res.end("This is the product");
+     } else if (pathName === '/api') {
+
+          // Showing the data for requested url
+               res.writeHead(200, {'content-type': 'application/json'});
+               res.end(data);
+
+     } else {
+          res.writeHead(404, {
+               'content-type': 'text/html',
+               'my-own-header': 'hello-world'
+          });
+          res.end("<h1>Page not found</h1>");
+     }
+});
+
+// Starting a server 
+server.listen(8000, '127.0.0.1', () => {
+     console.log('Listining to requests on port 8000');
+});
+*/
 
 
+// ------------------------ Building the templates ------------------------//
+
+
+// Reading the file
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+
+// Creating a server
+const server = http.createServer((req, res) => {
+
+     // Getting url of requested server
+     const pathName = req.url;
+
+     // Responding as per server request
+     if (pathName === '/overview' || pathName === '/') {
+          res.end("This is the Overview");
+     } else if (pathName === '/Product') {
+          res.end("This is the product");
+     } else if (pathName === '/api') {
+
+          // Showing the data for requested url
+               res.writeHead(200, {'content-type': 'application/json'});
+               res.end(data);
+
+     } else {
+          res.writeHead(404, {
+               'content-type': 'text/html',
+               'my-own-header': 'hello-world'
+          });
+          res.end("<h1>Page not found</h1>");
+     }
+});
+
+// Starting a server 
+server.listen(8000, '127.0.0.1', () => {
+     console.log('Listining to requests on port 8000');
+});

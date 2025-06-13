@@ -1,5 +1,7 @@
 const fs = require('fs');
 const http = require('http');
+const url = require('url');
+
 
 /*
 // ------------------------ Reading and writting files Synchronically------------------------//
@@ -43,18 +45,31 @@ console.log("will read file!");
 console.log(fs.readFileSync(`./txt/final.txt`, 'utf-8'));
 */
 
-// ------------------------ Creating a basic sever ------------------------//
+// ------------------------ Routing ------------------------//
 
 // Creating a server
 const server = http.createServer((req, res) => {
-     console.log(req);
-     res.end('Hello from the server!');
+
+     // Getting url of requested server
+     const pathName = req.url;
+
+     // Responding as per server request
+     if (pathName === '/overview' || pathName === '/') {
+          res.end("This is the Overview");
+     } else if (pathName === '/Product') {
+          res.end("This is the product");
+     } else {
+          res.writeHead(404, {
+               'content-type': 'text.html',
+               'my-own-header': 'hello-world'
+          });
+          res.end("<h1>Page not found</h1>");
+     }
 });
 
 // Starting a server 
 server.listen(8000, '127.0.0.1', () => {
      console.log('Listining to requests on port 8000');
-})
+});
 
 
-// ------------------------ Creating a basic sever ------------------------//

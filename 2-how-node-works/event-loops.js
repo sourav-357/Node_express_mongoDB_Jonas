@@ -36,6 +36,4 @@ fs.readFile("./test-file.txt", "utf-8", () => {
 console.log("hello from the top-level Code");
 */
 
-// -------------------------------- Events in Practice --------------------------------//
-
-
+// -------------------------------- Completed --------------------------------//

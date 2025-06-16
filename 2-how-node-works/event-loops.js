@@ -1,6 +1,11 @@
 const fs = require("fs");
-const { nextTick } = require("process");
+const nextTick = require("process");
+const crypto = require("crypto");
 
+
+// -------------------------------- Event Loop in Practice --------------------------------//
+
+/*
 // TimeOut Functions are next in the top level codes -->> Not callback and hence top level
 setTimeout(() => console.log("Timer 1 finished"), 0);
 
@@ -29,3 +34,8 @@ fs.readFile("./test-file.txt", "utf-8", () => {
 
 // The top level Code that will be executed first before anything else
 console.log("hello from the top-level Code");
+*/
+
+// -------------------------------- Events in Practice --------------------------------//
+
+

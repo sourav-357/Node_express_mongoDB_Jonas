@@ -75,15 +75,19 @@ console.log('Will read file now...');
 // ************************** Creating a server **************************//
 
 
-// Importing the built in http module
+// Importing the required modules
 const http = require('http');
-
-// Importing the fs (File System) module to read and write data from files
 const fs = require('fs');
-
-// Importing the url module to route the request by urlparser
 const url = require('url');
 const path = require('path');
+
+
+// Reading the data from the file ./dev-data/data.json
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
+
+// parsing and storing data
+const dataObj = JSON.parse(data);
+
 
 // Creating a first server
 const server = http.createServer((req, res) => {
@@ -100,21 +104,21 @@ const server = http.createServer((req, res) => {
 
     } else if(pathName === '/api') {
 
-        // reading the data from the file ./dev-data/data.json
-        fs.readFile(`${__dirname}/dev-data/data.json`, 'utf-8', (err, data) => {
+        // Telling the browser about the status code and the type of content we are sending
+        res.writeHead(200, { 
+            'content-type': 'application/json' 
+        });
 
-            // parsing and storing the data
-            const productData = JSON.parse(data);
-
-            console.log(productData);
-        })
-
-        res.end('API');
+        // Sending the data to the browser 
+        res.end(data);
 
     } else {
+        // Telling the browser about the status code and the type of content we are sending
         res.writeHead(404, {
             'content-type': 'text/html',
         });
+
+        // replying to the request
         res.end('<h1>Page not found</h1>')
     }
 });

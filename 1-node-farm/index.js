@@ -92,19 +92,26 @@ const server = http.createServer((req, res) => {
     const pathName = req.url;
 
     // Routing to the /overview request page
-    if (pathName === '/overview') {
-        // replying to the requested url 
+    if (pathName === '/overview' || pathName === '/') {
         res.end('This is the OVERVIEW');
-    } else 
 
-    // Routing to the /product page
-    if (pathName === '/product') {
-        // replying to the requested url 
+    } else if (pathName === '/product') {
         res.end('This is the PRODUCT');
-    } else 
 
-    // If none of the above requests are made
-    {
+    } else if(pathName === '/api') {
+
+        // reading the data from the file ./dev-data/data.json
+        fs.readFile(`${__dirname}/dev-data/data.json`, 'utf-8', (err, data) => {
+
+            // parsing and storing the data
+            const productData = JSON.parse(data);
+
+            console.log(productData);
+        })
+
+        res.end('API');
+
+    } else {
         res.writeHead(404, {
             'content-type': 'text/html',
         });

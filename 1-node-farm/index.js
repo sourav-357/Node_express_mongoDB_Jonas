@@ -44,6 +44,7 @@ const fs = require('fs');
 
 // Reading datafrom another file -->> callback function -->> (err, data)
 fs.readFile('./txt/start.txt', 'utf-8', (err, data1) => {
+    if(err) return console.log('ERROR...!!');
 
     // Reading file 'read-this.txt' and storing data as data 2
     fs.readFile(`./txt/${data1}.txt`, 'utf-8', (err, data2) => {

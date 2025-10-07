@@ -81,12 +81,38 @@ const http = require('http');
 // Importing the fs (File System) module to read and write data from files
 const fs = require('fs');
 
+// Importing the url module to route the request by urlparser
+const url = require('url');
+const path = require('path');
+
 // Creating a first server
 const server = http.createServer((req, res) => {
-    res.end('Hellooo from the server...!');
+
+    // storing the requsested url
+    const pathName = req.url;
+
+    // Routing to the /overview request page
+    if (pathName === '/overview') {
+        // replying to the requested url 
+        res.end('This is the OVERVIEW');
+    } else 
+
+    // Routing to the /product page
+    if (pathName === '/product') {
+        // replying to the requested url 
+        res.end('This is the PRODUCT');
+    } else 
+
+    // If none of the above requests are made
+    {
+        res.writeHead(404, {
+            'content-type': 'text/html',
+        });
+        res.end('<h1>Page not found</h1>')
+    }
 });
 
 // starting the server at any port 
 server.listen(8000, () => {
     console.log('Listining to server at port 8000...😊')
-})
+});

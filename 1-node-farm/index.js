@@ -1,6 +1,7 @@
 
 // ************************** Using Module 1 in Node.js **************************//
 
+
 /*
 // importing the fs module
 const fs = require('fs');
@@ -14,9 +15,11 @@ const textOut = `This is what we know about avocadro: ${textIn}\nCreated on ${Da
 fs.writeFileSync('./txt/final.txt', textOut);
 console.log('File Written Success...!');
 */
+
 
 // ************************** Synchronous method (Blocking) **************************//
 
+
 /*
 // importing the fs module
 const fs = require('fs');
@@ -31,8 +34,11 @@ fs.writeFileSync('./txt/final.txt', textOut);
 console.log('File Written Success...!');
 */
 
+
 // ************************** Asynchronous method (Non-Blocking) **************************//
 
+
+/*
 // importing the fs module
 const fs = require('fs');
 
@@ -47,7 +53,7 @@ fs.readFile('./txt/start.txt', 'utf-8', (err, data1) => {
         fs.readFile('./txt/append.txt', 'utf-8', (err, data3) => {
             console.log(data3);
 
-            // writting the data2 and data3 in final.txt file 
+            // writting the data2 and data3 in final.txt file
             fs.writeFile('./txt/final.txt', `${data2}\n${data3}`, 'utf-8', (err) => {
                 console.log('Data is written successfully...!🙂');
 
@@ -60,5 +66,12 @@ fs.readFile('./txt/start.txt', 'utf-8', (err, data1) => {
     });
 });
 
-// writing something to see if the async code works or not 
+// writing something to see if the async code works or not
 console.log('Will read file now...');
+*/
+
+
+// ************************** Asynchronous method (Non-Blocking) **************************//
+
+
+// 

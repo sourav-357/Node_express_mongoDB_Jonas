@@ -8,3 +8,8 @@ const fs = require('fs');
 const textIn = fs.readFileSync('./txt/input.txt', 'utf-8');
 console.log(textIn);
 
+// Writing the data on another file by the help of fs module
+const textOut = `This is what we know about avocadro: ${textIn}\nCreated on ${Date.now()}`;
+fs.writeFileSync('./txt/final.txt', textOut);
+console.log('File Written Success...!');
+

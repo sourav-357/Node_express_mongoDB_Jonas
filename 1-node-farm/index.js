@@ -72,7 +72,21 @@ console.log('Will read file now...');
 */
 
 
-// ************************** Asynchronous method (Non-Blocking) **************************//
+// ************************** Creating a server **************************//
 
 
-// 
+// Importing the built in http module
+const http = require('http');
+
+// Importing the fs (File System) module to read and write data from files
+const fs = require('fs');
+
+// Creating a first server
+const server = http.createServer((req, res) => {
+    res.end('Hellooo from the server...!');
+});
+
+// starting the server at any port 
+server.listen(8000, () => {
+    console.log('Listining to server at port 8000...😊')
+})

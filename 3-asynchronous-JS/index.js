@@ -63,6 +63,7 @@ const getDogPic = async () =>{
         console.log('ERROR 💥');
     }
     }) ();
+    
 console.log('1: Will get dog pics!!')
 getDogPic().then (x => {
 

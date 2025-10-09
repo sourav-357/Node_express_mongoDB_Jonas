@@ -100,7 +100,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
     // if we are trying to access the data of id that is not in our list 
     if (id >= tours.length) {
         return res.status(404).json({
-            status: 'success', 
+            status: 'Failed...!', 
             err: `No data found for id:${id}`
         });
     }

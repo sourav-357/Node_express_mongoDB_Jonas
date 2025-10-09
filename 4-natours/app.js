@@ -153,7 +153,7 @@ app.delete('/api/v1/tours/:id', (req, res) => {
         });
     }
     res.status(200) // setting the status code
-    res.json({ // sending response to url
+    res.json({ // sending response to url 
         status: 'Success',
         data: null,
     });  

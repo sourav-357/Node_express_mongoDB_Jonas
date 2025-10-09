@@ -123,6 +123,25 @@ app.get('/api/v1/tours/:id', (req, res) => {
 
 
 
+// creating a router for '/api/v1/tours/:id' patch request to update the information
+app.patch('/api/v1/tours/:id', (req, res) => {
+    
+    // if we are trying to access the data of id that is not in our list 
+    if (req.params.id * 1 >= tours.length) {
+        return res.status(404).json({
+            status: 'Failed...!', 
+            err: `No data found for id:${id}`
+        });
+    }
+    res.status(200) // setting the status code
+    res.json({ // sending response to url
+        status: 'Success',
+        data: 'Updated tour here...!'
+    });
+});
+
+
+
 // starting the server 
 app.listen(port, () => {
     console.log(`App running on port ${port} ....!`)

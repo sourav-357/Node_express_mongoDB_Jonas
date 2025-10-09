@@ -3,18 +3,18 @@
 const express = require('express');
 const http = require('http');
 
-// Creating a server
-const app = express();
 
-
-// Creating a port number 
-const port = 3000;
+const app = express(); // Creating a server
+const port = 3000; // Creating a port number 
 
 
 // Routing the server 
 app.get('/', (req, res) => {
-    res.status(200)
-    res.send('Hellooo from the server side ....!')
+    res.status(200) // setting up the status code
+    res.json({ // sending response to the browser
+        message: 'Hellooo from the server side',
+        app: 'Natours',
+    });
 });
 
 

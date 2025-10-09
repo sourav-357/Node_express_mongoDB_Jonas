@@ -1,4 +1,7 @@
 
+// ************************************* Learning Basics of express ************************************* //
+
+/*
 // Importing the required modules
 const express = require('express');
 const http = require('http');
@@ -29,4 +32,37 @@ app.post('/', (req, res) => {
 app.listen(port, () => {
     console.log(`App running on port ${port} ....!`)
 });
+*/
 
+
+// ************************************* starting our main project ************************************* //
+
+
+// Importing the required modules
+const express = require('express');
+const http = require('http');
+const fs = require('fs');
+
+
+const app = express(); // Creating a server
+const port = 3000; // Creating a port number 
+
+
+// reading the tours data from external module
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.js`));
+
+
+// creating a router for '/api/v1/tours' get request 
+app.get('/api/v1/tours', (req, res) => {
+    res.status(200) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'success',
+        data: { tours },
+    });
+});
+
+
+// starting the server 
+app.listen(port, () => {
+    console.log(`App running on port ${port} ....!`)
+});

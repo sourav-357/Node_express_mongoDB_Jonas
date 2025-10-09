@@ -91,7 +91,13 @@ app.post('/api/v1/tours', (req, res) => {
 // creating a router for '/api/v1/tours/:id' get request 
 app.get('/api/v1/tours/:id', (req, res) => {
 
+    console.log(req.params) // to see which id is been asked for 
     const id = req.params.id * 1 // id is converted to number from string by multiplying with 1
+
+    // if we are trying to access the data of id that is not in our list 
+    if (id >= tours.length) {
+        return res.status(404).json({err: `No data found for id:${id}`});
+    }
 
     // finding and storing the data of the tour that matches the tour id by help of tours.find() -->> as tours have data of all the tour
     const tour = tours.find((element) => element.id === id) 

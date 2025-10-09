@@ -88,6 +88,22 @@ app.post('/api/v1/tours', (req, res) => {
 })
 
 
+// creating a router for '/api/v1/tours/:id' get request 
+app.get('/api/v1/tours/:id', (req, res) => {
+
+    const id = req.params.id * 1 // id is converted to number from string by multiplying with 1
+
+    // finding and storing the data of the tour that matches the tour id by help of tours.find() -->> as tours have data of all the tour
+    const tour = tours.find((element) => element.id === id) 
+
+    res.status(200) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'Success',
+        data: { tour },
+    });
+});
+
+
 // starting the server 
 app.listen(port, () => {
     console.log(`App running on port ${port} ....!`)

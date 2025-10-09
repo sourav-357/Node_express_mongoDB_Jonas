@@ -48,8 +48,12 @@ const app = express(); // Creating a server
 const port = 3000; // Creating a port number 
 
 
+// using a middlewere 
+app.use(express.json()) // it converts the incomming data from post request to json
+
+
 // reading the tours data from external module
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.js`));
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
 
 
 // creating a router for '/api/v1/tours' get request 
@@ -57,9 +61,31 @@ app.get('/api/v1/tours', (req, res) => {
     res.status(200) // status code for the request 
     res.json({ // sending data in json format 
         status: 'success',
+        results: tours.length, // to get the total number of destinations
         data: { tours },
     });
 });
+
+
+// creating a router for '/api/v1/tours' get request 
+app.post('/api/v1/tours', (req, res) => {
+    
+    const newId = tours.length; // setting up the id for the new tour
+    const newTour = Object.assign({id: newId}, req.body) // it will store the data in form of Object hence we used object.assign()
+    // we want the id to be newId hence we passed that and then all the data from req.body to be put underthe newTour 
+    // That is why we passed the req.body, and also to set the id of that newTour we have to pass {id: newId}
+
+    tours.push(newTour) // adding the new tour to the tour arrays
+
+    // putting the newly created tour to teh list of old tours
+    fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours), 'utf-8', (err) => {
+        res.status(201) // status code for created
+        res.json({ // sending the data 
+            status: 'Success',
+            data: { newTour },
+        });
+    });
+})
 
 
 // starting the server 

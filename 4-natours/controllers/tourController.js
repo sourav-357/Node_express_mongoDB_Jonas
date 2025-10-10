@@ -23,6 +23,18 @@ const checkId = (req, res, next, val) => {
 }
 
 
+// function to check if the created tour have name and price property
+const checkBody = (req, res, next) => {
+    if (!req.body.name || !req.body.price) {
+        return res.status(400).json({
+            status: 'Fail',
+            message: 'Missing name or price property...!'
+        })
+    }
+    next() // to proceed the to next step otherwise we will be stuck here 
+}
+
+
 // creating a function for '/api/v1/tours' get request 
 const getAllTours = (req, res) => {
     res.status(200) // status code for the request 
@@ -101,5 +113,6 @@ module.exports = {
     deleteTour,
     createTour,
     checkId,
+    checkBody,
 }
 

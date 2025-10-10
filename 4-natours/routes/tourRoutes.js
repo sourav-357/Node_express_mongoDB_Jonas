@@ -3,7 +3,7 @@
 const express = require('express')
 
 // importing the tour functions from tour controller file
-const { getAllTours, getTour, createTour, updateTour, deleteTour, checkId } = require('../controllers/tourController.js')
+const { getAllTours, getTour, createTour, updateTour, deleteTour, checkId, checkBody } = require('../controllers/tourController.js')
 
 
 // *********************************************** CREATING ROUTERS FOR TOURS ***********************************************//
@@ -13,7 +13,7 @@ const router = express.Router() // express.Router() will help us to route all re
 router.param('id', checkId) // to check if the id is working or not
 
 // matching the routes for tours to their functions
-router.route('/').get(getAllTours).post(createTour) 
+router.route('/').get(getAllTours).post(checkBody, createTour) 
 // get request on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
 

@@ -75,8 +75,8 @@ const getAllTours = (req, res) => {
 
 
 
-// creating a router for '/api/v1/tours' get request 
-const createNewTour = (req, res) => {
+// creating a function for '/api/v1/tours' post request 
+const createTour = (req, res) => {
     
     const newId = tours.length; // setting up the id for the new tour
     const newTour = Object.assign({id: newId}, req.body) // it will store the data in form of Object hence we used object.assign()
@@ -97,14 +97,8 @@ const createNewTour = (req, res) => {
 
 
 
-// matching the routes to their functions 
-app.get('/api/v1/tours', getAllTours);
-app.post('/api/v1/tours', createNewTour);
-
-
-
-// creating a router for '/api/v1/tours/:id' get request 
-app.get('/api/v1/tours/:id', (req, res) => {
+// creating a function for '/api/v1/tours/:id' get request 
+const getTour = (req, res) => {
 
     console.log(req.params) // to see which id is been asked for 
     const id = req.params.id * 1 // id is converted to number from string by multiplying with 1
@@ -115,8 +109,7 @@ app.get('/api/v1/tours/:id', (req, res) => {
             status: 'Failed...!', 
             err: `No data found for id:${id}`
         });
-    }
-    
+    }     
     // finding and storing the data of the tour that matches the tour id by help of tours.find() -->> as tours have data of all the tour
     const tour = tours.find((element) => element.id === id) 
     res.status(200) // status code for the request 
@@ -124,12 +117,12 @@ app.get('/api/v1/tours/:id', (req, res) => {
         status: 'Success',
         data: { tour },
     });
-});
+}
 
 
 
 // creating a router for '/api/v1/tours/:id' patch request to update the information
-app.patch('/api/v1/tours/:id', (req, res) => {
+const updateTour = (req, res) => {
     
     // if we are trying to access the data of id that is not in our list 
     if (req.params.id * 1 >= tours.length) {
@@ -143,12 +136,12 @@ app.patch('/api/v1/tours/:id', (req, res) => {
         status: 'Success',
         data: 'Updated tour here...!'
     });
-});
+}
 
 
 
-// creating a router for '/api/v1/tours/:id' patch request to update the information
-app.delete('/api/v1/tours/:id', (req, res) => {
+// creating a router for '/api/v1/tours/:id' delete request to update the information
+const deleteTour = (req, res) => {
     
     // if we are trying to access the data of id that is not in our list 
     if (req.params.id * 1 >= tours.length) {
@@ -162,7 +155,16 @@ app.delete('/api/v1/tours/:id', (req, res) => {
         status: 'Success',
         data: null,
     });  
-});
+}
+
+
+
+// matching the routes to their functions 
+app.get('/api/v1/tours', getAllTours);
+app.post('/api/v1/tours', createTour);
+app.get('/api/v1/tours/:id', getTour);
+app.patch('/api/v1/tours/:id', updateTour);
+app.delete('/api/v1/tours/:id', deleteTour);
 
 
 

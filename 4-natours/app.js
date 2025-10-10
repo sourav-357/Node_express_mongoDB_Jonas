@@ -276,7 +276,7 @@ app.listen(port, () => {
 // ********************************************** starting again for clartity ********************************************** //
 
 
-
+/*
 // Importing the required modules
 const express = require('express')
 const morgan = require('morgan')
@@ -293,7 +293,7 @@ app.use(morgan('dev')) // to console.log the information about the requested url
 
 
 
-// ********************************************** Creating function for user ********************************************** //
+// ********************************************** Creating function for tours ********************************************** //
 
 
 
@@ -477,6 +477,71 @@ app.use('/api/v1/users', userRouter) // this is now set as start point for userR
 userRouter.route('/').get(getAllUsers).post(createUser)
 // get request on '/api/v1/users' will call createUser and post on '/api/v1/users' will call createUser
 userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
+
+
+
+// ********************************************** Starting server ********************************************** //
+
+
+
+// starting the server 
+app.listen(port, () => {
+    console.log(`App running on port ${port} ....!`)
+});
+
+
+*/
+// ****************************************************** Completed ****************************************************** //
+
+
+
+
+
+
+
+// WE ARE STARTING AGAIN AS THERE ARE NOW LOT OF CHANGES THAT ARE GONNA TAKE PLACE IN THE ROUTES PART 
+// JUST SO THAT I WON'T BE ABLE TO UNDERSTAND IT LATER THAT WHY THIS IS AND WHAT SHOULD BE THERE INSTEAD OF THIS 
+// I AM CREATING A NEW START SO THAT I COLUD HAVE MY EARLIER CODES
+
+
+// THE MAIN REASON IS THAT THERE WERE CHANEGS IN THE ROUTERS PART -->> LOTS OF CHANGES
+// I DON'T WANNA LOOSE THE CHANGES I HAVE MADE TILL NOW
+
+
+
+
+
+
+
+// ********************************************** starting again for clartity ********************************************** //
+
+
+
+// Importing the required modules
+const express = require('express')
+const morgan = require('morgan')
+const fs = require('fs')
+
+
+const app = express() // Creating a server
+const port = 3000 // Creating a port number 
+
+
+// using a middlewere 
+app.use(express.json()) // it converts the incomming data from post request to json
+app.use(morgan('dev')) // to console.log the information about the requested url by the browser
+
+
+
+// ********************************************** Creating Routes ********************************************** //
+
+
+const tourRouter = require('./routes/tourRoutes') // importing the tour router
+app.use('/api/v1/tours', tourRouter) // this is now set as start point for tourRouter and will respond to request made after '/api/v1/tours'
+
+const userRouter = require('./routes/userRoutes.js') // importing the tour router
+app.use('/api/v1/users', userRouter) // this is now set as start point for userRouter and will respond to request made after '/api/v1/users'
+
 
 
 

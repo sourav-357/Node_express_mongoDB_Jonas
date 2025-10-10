@@ -457,12 +457,12 @@ const deleteUser = (req, res) => {
 
 // 1) CREATING ROUTERS FOR TOURS
 const tourRouter = express.Router() // express.Router() will help us to route all request at one place
-tourRouter.route('/api/v1/tours') // this is now set as a start point for tourRouter and will respond to the request made after '/api/v1/tours'
+app.use('/api/v1/tours', tourRouter) // this is now set as start point for tourRouter and will respond to request made after '/api/v1/tours'
 
 
 // matching the routes for tours to their functions
 tourRouter.route('/').get(getAllTours).post(createTour) 
-// get on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
+// get request on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
 tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
 
 
@@ -470,13 +470,13 @@ tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
 
 
 // 2) CREATING ROUTERS FOR USERS
-const usersRouter = express.Router() // express.Router() will help us to route all request at one place
-usersRouter.route('/api/v1/users') // this is now set as start point for usersRouter and will respond to the request made after '/api/v1/users'
+const userRouter = express.Router() // express.Router() will help us to route all request at one place
+app.use('/api/v1/users', userRouter) // this is now set as start point for userRouter and will respond to request made after '/api/v1/users'
 
 // matching the routes for user to their functions
-usersRouter.route('/api/v1/users').get(getAllUsers).post(createUser)
-// get on '/api/v1/users' will call createUser and post on '/api/v1/users' will call createUser
-usersRouter.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
+userRouter.route('/').get(getAllUsers).post(createUser)
+// get request on '/api/v1/users' will call createUser and post on '/api/v1/users' will call createUser
+userRouter.route('/:id').get(getUser).patch(updateUser).delete(deleteUser)
 
 
 

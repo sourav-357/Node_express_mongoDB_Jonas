@@ -159,12 +159,18 @@ const deleteTour = (req, res) => {
 
 
 
-// matching the routes to their functions 
+/* 
 app.get('/api/v1/tours', getAllTours);
 app.post('/api/v1/tours', createTour);
 app.get('/api/v1/tours/:id', getTour);
 app.patch('/api/v1/tours/:id', updateTour);
 app.delete('/api/v1/tours/:id', deleteTour);
+*/
+
+// matching the routes to their functions
+app.route('/api/v1/tours').get(getAllTours).post(createTour) 
+// get on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
+app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
 
 
 

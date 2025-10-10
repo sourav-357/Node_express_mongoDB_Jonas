@@ -3,9 +3,7 @@
 const fs = require('fs')
 
 
-
 // ********************************************** Creating function for tours ********************************************** //
-
 
 
 // reading the tours data from external module
@@ -103,7 +101,6 @@ const deleteTour = (req, res) => {
 }
 
 
-
 // ********************************************** EXPORTING THE FUNCTIONS ********************************************** //
 
 
@@ -114,3 +111,4 @@ module.exports = {
     deleteTour,
     createTour
 }
+

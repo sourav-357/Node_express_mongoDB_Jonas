@@ -6,15 +6,10 @@ const express = require('express')
 const { getAllTours, getTour, createTour, updateTour, deleteTour } = require('../controllers/tourController.js')
 
 
-
 // *********************************************** CREATING ROUTERS FOR TOURS ***********************************************//
 
 
-
-
 const router = express.Router() // express.Router() will help us to route all request at one place
-
-
 
 // matching the routes for tours to their functions
 router.route('/').get(getAllTours).post(createTour) 
@@ -22,6 +17,6 @@ router.route('/').get(getAllTours).post(createTour)
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
 
 
-
 // exporting the router
 module.exports = router
+

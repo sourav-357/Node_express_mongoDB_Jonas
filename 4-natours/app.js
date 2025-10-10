@@ -63,20 +63,20 @@ const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simpl
 
 
 
-// creating a router for '/api/v1/tours' get request 
-app.get('/api/v1/tours', (req, res) => {
+// creating a function for '/api/v1/tours' get request 
+const getAllTours = (req, res) => {
     res.status(200) // status code for the request 
     res.json({ // sending data in json format 
         status: 'success',
         results: tours.length, // to get the total number of destinations
         data: { tours },
     });
-});
+}
 
 
 
 // creating a router for '/api/v1/tours' get request 
-app.post('/api/v1/tours', (req, res) => {
+const createNewTour = (req, res) => {
     
     const newId = tours.length; // setting up the id for the new tour
     const newTour = Object.assign({id: newId}, req.body) // it will store the data in form of Object hence we used object.assign()
@@ -93,7 +93,13 @@ app.post('/api/v1/tours', (req, res) => {
             data: { newTour },
         });
     });
-})
+}
+
+
+
+// matching the routes to their functions 
+app.get('/api/v1/tours', getAllTours);
+app.post('/api/v1/tours', createNewTour);
 
 
 
@@ -113,7 +119,6 @@ app.get('/api/v1/tours/:id', (req, res) => {
     
     // finding and storing the data of the tour that matches the tour id by help of tours.find() -->> as tours have data of all the tour
     const tour = tours.find((element) => element.id === id) 
-
     res.status(200) // status code for the request 
     res.json({ // sending data in json format 
         status: 'Success',

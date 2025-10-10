@@ -9,6 +9,19 @@ const fs = require('fs')
 // reading the tours data from external module
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`))
 
+// creating function to checkId is valid or not 
+const checkId = (req, res, next, val) => {
+    console.log(`Tour id is ${val}`)
+
+    if (req.params.id * 1 >= tours.length) {
+        return res.status(404).json({
+            status: 'Failed...!', 
+            err: `No data found for id:${val}`
+        })
+    }
+    next() // to proceed the to next step otherwise we will be stuck here 
+}
+
 
 // creating a function for '/api/v1/tours' get request 
 const getAllTours = (req, res) => {
@@ -48,13 +61,6 @@ const getTour = (req, res) => {
     // console.log(req.params) // to see which id is been asked for 
     const id = req.params.id * 1 // id is converted to number from string by multiplying with 1
 
-    // if we are trying to access the data of id that is not in our list 
-    if (id >= tours.length) {
-        return res.status(404).json({
-            status: 'Failed...!', 
-            err: `No data found for id:${id}`
-        });
-    }     
     // finding and storing the data of the tour that matches the tour id by help of tours.find() -->> as tours have data of all the tour
     const tour = tours.find((element) => element.id === id) 
     res.status(200) // status code for the request 
@@ -67,14 +73,6 @@ const getTour = (req, res) => {
 
 // creating a function for '/api/v1/tours/:id' patch request to update the information
 const updateTour = (req, res) => {
-    
-    // if we are trying to access the data of id that is not in our list 
-    if (req.params.id * 1 >= tours.length) {
-        return res.status(404).json({
-            status: 'Failed...!', 
-            err: `No data found for id:${id}`
-        });
-    }
     res.status(200) // setting the status code
     res.json({ // sending response to url
         status: 'Success',
@@ -85,14 +83,6 @@ const updateTour = (req, res) => {
 
 // creating a function for '/api/v1/tours/:id' delete request to update the information
 const deleteTour = (req, res) => {
-    
-    // if we are trying to access the data of id that is not in our list 
-    if (req.params.id * 1 >= tours.length) {
-        return res.status(204).json({
-            status: 'Failed...!', 
-            err: `No data found for id:${id}`
-        });
-    }
     res.status(200) // setting the status code
     res.json({ // sending response to url 
         status: 'Success',
@@ -109,6 +99,7 @@ module.exports = {
     getTour,
     updateTour,
     deleteTour,
-    createTour
+    createTour,
+    checkId,
 }
 

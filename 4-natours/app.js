@@ -260,12 +260,18 @@ app.listen(port, () => {
 
 
 
+
+
+
 // WE ARE STARTING AGAIN AS THERE ARE NOW LOT OF CHANGES THAT ARE GONNA TAKE PLACE IN THE ROUTES PART 
 // JUST SO THAT I WON'T BE ABLE TO UNDERSTAND IT LATER THAT WHY THIS IS AND WHAT SHOULD BE THERE INSTEAD OF THIS 
 // I AM CREATING A NEW START SO THAT I COLUD HAVE MY EARLIER CODES
 
 
 // THE MAIN REASON IS THAT THERE WERE CHANEGS IN THE ROUTERS PART -->> LOTS OF CHANGES
+
+
+
 
 
 
@@ -499,6 +505,9 @@ app.listen(port, () => {
 
 
 
+
+
+
 // WE ARE STARTING AGAIN AS THERE ARE NOW LOT OF CHANGES THAT ARE GONNA TAKE PLACE IN THE ROUTES PART 
 // JUST SO THAT I WON'T BE ABLE TO UNDERSTAND IT LATER THAT WHY THIS IS AND WHAT SHOULD BE THERE INSTEAD OF THIS 
 // I AM CREATING A NEW START SO THAT I COLUD HAVE MY EARLIER CODES
@@ -506,6 +515,9 @@ app.listen(port, () => {
 
 // THE MAIN REASON IS THAT THERE WERE CHANEGS IN THE ROUTERS PART -->> LOTS OF CHANGES
 // I DON'T WANNA LOOSE THE CHANGES I HAVE MADE TILL NOW
+
+
+
 
 
 
@@ -534,6 +546,7 @@ app.use(morgan('dev')) // to console.log the information about the requested url
 
 
 // ********************************************** Creating Routes ********************************************** //
+
 
 
 const tourRouter = require('./routes/tourRoutes') // importing the tour router

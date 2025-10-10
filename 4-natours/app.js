@@ -39,8 +39,233 @@ app.listen(port, () => {
 
 
 
-// ***************************************************** starting our main project ***************************************************** //
+// ***************************************************** small step for our project ***************************************************** //
 
+
+
+/*
+// Importing the required modules
+const express = require('express')
+const morgan = require('morgan')
+const fs = require('fs')
+
+
+const app = express() // Creating a server
+const port = 3000 // Creating a port number 
+
+
+// using a middlewere 
+app.use(express.json()) // it converts the incomming data from post request to json
+app.use(morgan('dev')) // to console.log the information about the requested url by the browser
+
+
+
+// ********************************************** Creating function for user ********************************************** //
+
+
+
+// reading the tours data from external module
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
+
+
+// creating a function for '/api/v1/tours' get request 
+const getAllTours = (req, res) => {
+    res.status(200) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'success',
+        results: tours.length, // to get the total number of destinations
+        data: { tours },
+    });
+}
+
+
+// creating a function for '/api/v1/tours' post request 
+const createTour = (req, res) => {
+    
+    const newId = tours.length; // setting up the id for the new tour
+    const newTour = Object.assign({id: newId}, req.body) // it will store the data in form of Object hence we used object.assign()
+    // we want the id to be newId hence we passed that and then all the data from req.body to be put underthe newTour 
+    // That is why we passed the req.body, and also to set the id of that newTour we have to pass {id: newId}
+
+    tours.push(newTour) // adding the new tour to the tour arrays
+
+    // putting the newly created tour to teh list of old tours
+    fs.writeFile(`${__dirname}/dev-data/data/tours-simple.json`, JSON.stringify(tours), 'utf-8', (err) => {
+        res.status(201) // status code for created
+        res.json({ // sending the data 
+            status: 'Success',
+            data: { newTour },
+        });
+    });
+}
+
+
+// creating a function for '/api/v1/tours/:id' get request 
+const getTour = (req, res) => {
+
+    // console.log(req.params) // to see which id is been asked for 
+    const id = req.params.id * 1 // id is converted to number from string by multiplying with 1
+
+    // if we are trying to access the data of id that is not in our list 
+    if (id >= tours.length) {
+        return res.status(404).json({
+            status: 'Failed...!', 
+            err: `No data found for id:${id}`
+        });
+    }     
+    // finding and storing the data of the tour that matches the tour id by help of tours.find() -->> as tours have data of all the tour
+    const tour = tours.find((element) => element.id === id) 
+    res.status(200) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'Success',
+        data: { tour },
+    });
+}
+
+
+// creating a function for '/api/v1/tours/:id' patch request to update the information
+const updateTour = (req, res) => {
+    
+    // if we are trying to access the data of id that is not in our list 
+    if (req.params.id * 1 >= tours.length) {
+        return res.status(404).json({
+            status: 'Failed...!', 
+            err: `No data found for id:${id}`
+        });
+    }
+    res.status(200) // setting the status code
+    res.json({ // sending response to url
+        status: 'Success',
+        data: 'Updated tour here...!'
+    });
+}
+
+
+// creating a function for '/api/v1/tours/:id' delete request to update the information
+const deleteTour = (req, res) => {
+    
+    // if we are trying to access the data of id that is not in our list 
+    if (req.params.id * 1 >= tours.length) {
+        return res.status(204).json({
+            status: 'Failed...!', 
+            err: `No data found for id:${id}`
+        });
+    }
+    res.status(200) // setting the status code
+    res.json({ // sending response to url 
+        status: 'Success',
+        data: null,
+    });  
+}
+
+
+
+// ********************************************** Creating function for user ********************************************** //
+
+
+
+// reading the tours data from external module
+const users = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/users.json`))
+
+
+// creating a function for '/api/v1/users' get request 
+const getAllUsers = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a function for '/api/v1/users' post request 
+const createUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a function for '/api/v1/users/:id' get request 
+const getUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a router for '/api/v1/users/:id' patch request to update the information
+const updateUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a router for '/api/v1/users/:id' delete request to update the information
+const deleteUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// ********************************************** Creating Routes ********************************************** //
+
+
+// app.get('/api/v1/tours', getAllTours);
+// app.post('/api/v1/tours', createTour);
+// app.get('/api/v1/tours/:id', getTour);
+// app.patch('/api/v1/tours/:id', updateTour);
+// app.delete('/api/v1/tours/:id', deleteTour);
+
+
+// matching the routes for tours to their functions
+app.route('/api/v1/tours').get(getAllTours).post(createTour) 
+// get on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
+app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
+
+
+// matching the routes for user to their functions
+app.route('/api/v1/users').get(getAllUsers).post(createUser)
+// get on '/api/v1/users' will call createUser and post on '/api/v1/users' will call createUser
+app.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
+
+
+
+// ********************************************** Starting server ********************************************** //
+
+
+
+// starting the server 
+app.listen(port, () => {
+    console.log(`App running on port ${port} ....!`)
+});
+
+
+
+*/
+// ********************************************** Completed the basic ********************************************** //
+
+
+
+
+
+
+
+
+
+
+
+// ********************************************** starting again for clartity ********************************************** //
 
 
 
@@ -254,4 +479,3 @@ app.listen(port, () => {
 
 
 // ********************************************** Completed ********************************************** //
-

@@ -56,11 +56,16 @@ const port = 3000 // Creating a port number
 
 // using a middlewere 
 app.use(express.json()) // it converts the incomming data from post request to json
+app.use(morgan('dev')) // to console.log the information about the requested url by the browser
+
+
+
+// ********************************************** Creating function for user ********************************************** //
+
 
 
 // reading the tours data from external module
 const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
-
 
 
 // creating a function for '/api/v1/tours' get request 
@@ -72,7 +77,6 @@ const getAllTours = (req, res) => {
         data: { tours },
     });
 }
-
 
 
 // creating a function for '/api/v1/tours' post request 
@@ -94,7 +98,6 @@ const createTour = (req, res) => {
         });
     });
 }
-
 
 
 // creating a function for '/api/v1/tours/:id' get request 
@@ -120,8 +123,7 @@ const getTour = (req, res) => {
 }
 
 
-
-// creating a router for '/api/v1/tours/:id' patch request to update the information
+// creating a function for '/api/v1/tours/:id' patch request to update the information
 const updateTour = (req, res) => {
     
     // if we are trying to access the data of id that is not in our list 
@@ -139,8 +141,7 @@ const updateTour = (req, res) => {
 }
 
 
-
-// creating a router for '/api/v1/tours/:id' delete request to update the information
+// creating a function for '/api/v1/tours/:id' delete request to update the information
 const deleteTour = (req, res) => {
     
     // if we are trying to access the data of id that is not in our list 
@@ -159,6 +160,67 @@ const deleteTour = (req, res) => {
 
 
 
+// ********************************************** Creating function for user ********************************************** //
+
+
+
+// reading the tours data from external module
+const users = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/users.json`))
+
+
+// creating a function for '/api/v1/users' get request 
+const getAllUsers = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a function for '/api/v1/users' post request 
+const createUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a function for '/api/v1/users/:id' get request 
+const getUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a router for '/api/v1/users/:id' patch request to update the information
+const updateUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// creating a router for '/api/v1/users/:id' delete request to update the information
+const deleteUser = (req, res) => {
+    res.status(500) // status code for the request 
+    res.json({ // sending data in json format 
+        status: 'error',
+        message: 'This route is yet not defined...!'
+    });
+}
+
+
+// ********************************************** Creating Routes ********************************************** //
+
+
 /* 
 app.get('/api/v1/tours', getAllTours);
 app.post('/api/v1/tours', createTour);
@@ -167,10 +229,20 @@ app.patch('/api/v1/tours/:id', updateTour);
 app.delete('/api/v1/tours/:id', deleteTour);
 */
 
-// matching the routes to their functions
+// matching the routes for tours to their functions
 app.route('/api/v1/tours').get(getAllTours).post(createTour) 
 // get on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
 app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
+
+
+// matching the routes for user to their functions
+app.route('/api/v1/users').get(getAllUsers).post(createUser)
+// get on '/api/v1/users' will call createUser and post on '/api/v1/users' will call createUser
+app.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
+
+
+
+// ********************************************** Starting server ********************************************** //
 
 
 

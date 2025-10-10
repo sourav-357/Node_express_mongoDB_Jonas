@@ -4,7 +4,8 @@
   "description": "Learning Node express and mongoDB",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start:dev": "nodemon server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon server.js"
   },
   "author": "Sourav Kumar",
   "license": "ISC",
@@ -13,5 +14,8 @@
     "express": "^4.21.2",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.10"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0"
   }
 }

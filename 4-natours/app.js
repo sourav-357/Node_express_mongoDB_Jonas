@@ -103,7 +103,7 @@ const createTour = (req, res) => {
 // creating a function for '/api/v1/tours/:id' get request 
 const getTour = (req, res) => {
 
-    console.log(req.params) // to see which id is been asked for 
+    // console.log(req.params) // to see which id is been asked for 
     const id = req.params.id * 1 // id is converted to number from string by multiplying with 1
 
     // if we are trying to access the data of id that is not in our list 
@@ -250,4 +250,8 @@ app.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
 app.listen(port, () => {
     console.log(`App running on port ${port} ....!`)
 });
+
+
+
+// ********************************************** Completed ********************************************** //
 

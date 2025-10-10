@@ -528,25 +528,19 @@ app.listen(port, () => {
 // ********************************************** starting again for clartity ********************************************** //
 
 
-
 // Importing the required modules
 const express = require('express')
 const morgan = require('morgan')
 const fs = require('fs')
 
-
 const app = express() // Creating a server
-const port = 3000 // Creating a port number 
-
 
 // using a middlewere 
 app.use(express.json()) // it converts the incomming data from post request to json
 app.use(morgan('dev')) // to console.log the information about the requested url by the browser
 
 
-
 // ********************************************** Creating Routes ********************************************** //
-
 
 
 const tourRouter = require('./routes/tourRoutes') // importing the tour router
@@ -556,17 +550,7 @@ const userRouter = require('./routes/userRoutes.js') // importing the tour route
 app.use('/api/v1/users', userRouter) // this is now set as start point for userRouter and will respond to request made after '/api/v1/users'
 
 
-
-
-// ********************************************** Starting server ********************************************** //
-
-
-
-// starting the server 
-app.listen(port, () => {
-    console.log(`App running on port ${port} ....!`)
-});
-
+module.exports = app // exporting app server's data 
 
 
 // ********************************************** Completed ********************************************** //

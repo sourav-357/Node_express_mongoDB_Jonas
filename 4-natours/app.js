@@ -538,6 +538,7 @@ const app = express() // Creating a server
 // using a middlewere 
 app.use(express.json()) // it converts the incomming data from post request to json
 app.use(morgan('dev')) // to console.log the information about the requested url by the browser
+app.use(express.static(`${__dirname}/public`)) // serving static file from public folder
 
 
 // ********************************************** Creating Routes ********************************************** //

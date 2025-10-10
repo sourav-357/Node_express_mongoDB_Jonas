@@ -9,6 +9,7 @@
   "author": "Sourav Kumar",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "express": "^4.21.2",
     "morgan": "^1.10.1",
     "nodemon": "^3.1.10"

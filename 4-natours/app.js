@@ -45,13 +45,13 @@ app.listen(port, () => {
 
 
 // Importing the required modules
-const express = require('express');
-const http = require('http');
-const fs = require('fs');
+const express = require('express')
+const morgan = require('morgan')
+const fs = require('fs')
 
 
-const app = express(); // Creating a server
-const port = 3000; // Creating a port number 
+const app = express() // Creating a server
+const port = 3000 // Creating a port number 
 
 
 // using a middlewere 
@@ -59,7 +59,7 @@ app.use(express.json()) // it converts the incomming data from post request to j
 
 
 // reading the tours data from external module
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`));
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`))
 
 
 

@@ -260,6 +260,14 @@ app.listen(port, () => {
 
 
 
+// WE ARE STARTING AGAIN AS THERE ARE NOW LOT OF CHANGES THAT ARE GONNA TAKE PLACE IN THE ROUTES PART 
+// JUST SO THAT I WON'T BE ABLE TO UNDERSTAND IT LATER THAT WHY THIS IS AND WHAT SHOULD BE THERE INSTEAD OF THIS 
+// I AM CREATING A NEW START SO THAT I COLUD HAVE MY EARLIER CODES
+
+
+// THE MAIN REASON IS THAT THERE WERE CHANEGS IN THE ROUTERS PART -->> LOTS OF CHANGES
+
+
 
 
 
@@ -446,24 +454,29 @@ const deleteUser = (req, res) => {
 // ********************************************** Creating Routes ********************************************** //
 
 
-/* 
-app.get('/api/v1/tours', getAllTours);
-app.post('/api/v1/tours', createTour);
-app.get('/api/v1/tours/:id', getTour);
-app.patch('/api/v1/tours/:id', updateTour);
-app.delete('/api/v1/tours/:id', deleteTour);
-*/
+
+// 1) CREATING ROUTERS FOR TOURS
+const tourRouter = express.Router() // express.Router() will help us to route all request at one place
+tourRouter.route('/api/v1/tours') // this is now set as a start point for tourRouter and will respond to the request made after '/api/v1/tours'
+
 
 // matching the routes for tours to their functions
-app.route('/api/v1/tours').get(getAllTours).post(createTour) 
+tourRouter.route('/').get(getAllTours).post(createTour) 
 // get on '/api/v1/tours' will call getAllTour and post on '/api/v1/tours' will call createTour
-app.route('/api/v1/tours/:id').get(getTour).patch(updateTour).delete(deleteTour)
+tourRouter.route('/:id').get(getTour).patch(updateTour).delete(deleteTour)
 
+
+
+
+
+// 2) CREATING ROUTERS FOR USERS
+const usersRouter = express.Router() // express.Router() will help us to route all request at one place
+usersRouter.route('/api/v1/users') // this is now set as start point for usersRouter and will respond to the request made after '/api/v1/users'
 
 // matching the routes for user to their functions
-app.route('/api/v1/users').get(getAllUsers).post(createUser)
+usersRouter.route('/api/v1/users').get(getAllUsers).post(createUser)
 // get on '/api/v1/users' will call createUser and post on '/api/v1/users' will call createUser
-app.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
+usersRouter.route('/api/v1/users/:id').get(getUser).patch(updateUser).delete(deleteUser)
 
 
 
